@@ -41,7 +41,10 @@ const theme = tokens => {
 
   const components = {};
   Object.entries(componentThemes).forEach(([names, themed]) => {
-    const [, name] = names.split('$');
+    const name =
+      names.indexOf('$') > -1
+        ? names.split('$')[1]
+        : names.substring(0, names.length / 2);
     components[name.toLowerCase()] = themed({
       ...tokens,
       colors,
